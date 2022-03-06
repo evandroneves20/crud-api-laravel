@@ -23,8 +23,8 @@ class ProdutoController extends Controller
 
     private function enviaEmail(string $texto, string $email)
     {
-        Notification::route('mail', $email
-            ->notify(new CreateOrUpdate($texto)));
+        Notification::route('mail', $email)
+            ->notify(new CreateOrUpdate($texto));
     }
 
     /**
