@@ -80,14 +80,12 @@ class LojaController extends Controller
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Loja $loja)
     {
         try {
-            $loja = $this->getLoja($id);
-
             $validator = Validator::make(
                 $request->all(),
-                Loja::rules($id),
+                Loja::rules($loja->id),
                 Loja::message()
             );
 
