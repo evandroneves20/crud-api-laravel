@@ -21,6 +21,12 @@ class ProdutoController extends Controller
         return response()->json($produtos);
     }
 
+    private function enviaEmail(string $texto, string $email)
+    {
+        Notification::route('mail', $email
+            ->notify(new CreateOrUpdate($texto)));
+    }
+
     /**
      * @param Request $request
      * @param Loja $loja
@@ -45,8 +51,7 @@ class ProdutoController extends Controller
                 'ativo' => $request->ativo,
             ]);
 
-            Notification::route('mail', $loja->email)
-                ->notify(new CreateOrUpdate("Produto {$produto->nome} Cadastrado com Sucesso"));
+            $this->enviaEmail("Produto {$produto->nome} Cadastrado com Sucesso", $loja->email);
 
             return response()->json([
                 'message' => "Produto {$request->nome} cadastrada com Sucesso!"
@@ -96,8 +101,7 @@ class ProdutoController extends Controller
                 'ativo' => $request->ativo,
             ]);
 
-            Notification::route('mail', $loja->email)
-                ->notify(new CreateOrUpdate("Produto {$produto->nome} Alterado com Sucesso"));
+            $this->enviaEmail("Produto {$produto->nome} Alterado com Sucesso", $loja->email);
 
             return response()->json([
                 'message' => "Produto {$request->nome} alterado com Sucesso!",
