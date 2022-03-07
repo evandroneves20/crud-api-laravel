@@ -14,7 +14,7 @@ php artisan config:cache
 php artisan db:seed
 php artisan serve
 ```
-Para rodar os testes é necessário ter o xdebug configurado e adicionar a linha ```xdebug.mode=coverage```  no arquivo .env
+Para rodar os testes é necessário ter o xdebug configurado e adicionar a linha ```xdebug.mode=coverage```  no arquivo php.ini
 
 ```bash
 composer test
